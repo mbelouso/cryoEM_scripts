@@ -37,8 +37,14 @@ mkdir temp_star
 
 relion_star_handler --i "$input_star" --operate rlnOpticsGroup --set_to 1 --o temp_star/cleaned_star.star
 
-for i in $(seq 0 68); do
+for i in $(seq 0 99); do
     echo "Processing optics group $i"
+    # check that this optic group exists
+    count=$(cat temp_star/cleaned_star.star | grep _${i}_ | wc -l)
+    if [ "$count" -eq 0 ]; then
+        echo "No optics group $i , skipping"
+        continue
+    fi
     relion_star_handler --i temp_star/cleaned_star.star \
         --o "temp_star/ptcls_tilt_group$(printf "%04d" $i).star" \
         --select_by_str rlnImageName \
