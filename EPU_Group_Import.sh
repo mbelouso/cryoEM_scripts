@@ -9,7 +9,7 @@
 # Module to load RELION (For our example on M3 Cluster)
 module load relion/5.0-20240320
 
-read -p "Enter the path to the directory containing movie files: " movie_dir
+read -p "Enter the path to the directory containing movie files (e.g. Micrographs/): " movie_dir
 if [ ! -d "$movie_dir" ]; then
     echo "Directory does not exist: $movie_dir"
     exit 1
